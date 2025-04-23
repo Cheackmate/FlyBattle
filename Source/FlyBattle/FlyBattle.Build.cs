@@ -11,7 +11,9 @@ public class FlyBattle : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
-
+		
+		PublicIncludePaths.Add("FlyBattle/Public");
+		PrivateIncludePaths.Add("FlyBattle/Private");
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
