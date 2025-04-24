@@ -17,5 +17,8 @@ class FLYBATTLE_API AFlyGameState : public AGameStateBase
 public:
 
 	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = "FlyPlayerState")
+
 	float Score = 0.0f;
+
+	void AddScore(float score);
 };

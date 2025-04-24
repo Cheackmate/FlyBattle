@@ -3,9 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FlyPlayerController.h"
 #include "GameFramework/Character.h"
 #include "FlyCharacter.generated.h"
 
+struct FInputActionValue;
+class UInputMappingContext;
+class UInputAction;
 class USphereComponent;
 class UCameraComponent;
 class USpringArmComponent;
@@ -23,10 +27,8 @@ protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	UPROPERTY(VisibleAnywhere,Category="Component")
-	USphereComponent* CollisionComp;
 
+	
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UStaticMeshComponent* ShipSM;
 
@@ -54,6 +56,9 @@ protected:
 	UPROPERTY(EditAnywhere,Category="Particle")
 	UParticleSystem* ExplosionParticle;
 
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	USceneComponent* SpawnPoint;
+
 public:
 
 	AFlyCharacter();
@@ -63,6 +68,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void Move(const FInputActionValue& InputActionValue);
+	void Look1();
+	void Look(const FInputActionValue& InputActionValue);
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -73,6 +81,23 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Fire")
 	void Fire();
 
-	UFUNCTION(BlueprintCallable, Category = "Move")
-	void MoveForward();
+
+protected:
+
+	/** Fire Input Action */  
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))  
+	UInputAction* FireAction;  
+  
+	/** Move Input Action */  
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))  
+	UInputAction* MoveAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))  
+	UInputAction* LookAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))  
+	UInputMappingContext* DefaultMappingContext;
+
+public:
+	AFlyPlayerController* FlyPlayerController = nullptr;
 };

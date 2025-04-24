@@ -3,13 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/Pawn.h"
+#include "System/FlyGameState.h"
 #include "FlyEnemy.generated.h"
 
 class USphereComponent;
 
 UCLASS()
-class FLYBATTLE_API AFlyEnemy : public APawn
+class FLYBATTLE_API AFlyEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -20,9 +22,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere,Category="Component")
-	USphereComponent* CollisionComp;
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "Component")
 	UStaticMeshComponent* ShipSM;
@@ -40,6 +39,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Team")
 	int TeamNumber;
+
+	AFlyGameState* GameState;
 
 public:
 	// Called every frame

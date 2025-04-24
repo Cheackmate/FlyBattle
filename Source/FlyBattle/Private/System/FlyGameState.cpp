@@ -2,3 +2,8 @@
 
 
 #include "System/FlyGameState.h"
+
+void AFlyGameState::AddScore(float score)
+{
+	Score += score;
+}

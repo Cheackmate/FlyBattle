@@ -2,3 +2,15 @@
 
 
 #include "FlyBattle/Public/FlyPlayerController.h"
+
+AFlyPlayerController::AFlyPlayerController()
+{
+	bShowMouseCursor = true;
+	
+}
+
+void AFlyPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}

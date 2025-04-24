@@ -10,7 +10,7 @@ public class FlyBattle : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "GameplayCameras", "GameplayCameras" });
 		
 		PublicIncludePaths.Add("FlyBattle/Public");
 		PrivateIncludePaths.Add("FlyBattle/Private");

@@ -3,8 +3,9 @@
 
 #include "FlyBattle/Public/FlyBullet.h"
 
+#include "Enemy/FlyEnemy.h"
+#include "Engine/BlockingVolume.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-
 
 // Sets default values
 AFlyBullet::AFlyBullet()
@@ -33,5 +34,20 @@ void AFlyBullet::BeginPlay()
 void AFlyBullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AFlyBullet::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+
+	AFlyEnemy* Enemy= Cast<AFlyEnemy>(OtherActor);
+	if (Enemy) {
+		Enemy->OnDeath();
+		Destroy();
+	}
+	else if (Cast<ABlockingVolume>(OtherActor)) {
+		Destroy();
+	}
+	
 }
 

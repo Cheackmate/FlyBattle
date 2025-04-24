@@ -13,4 +13,8 @@ UCLASS()
 class FLYBATTLE_API AFlyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+public:
+	AFlyPlayerController();
+
+	virtual void BeginPlay() override;
 };
