@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "FlyBullet.generated.h"
 
+class UProjectileMovementComponent;
+
 UCLASS()
 class FLYBATTLE_API AFlyBullet : public AActor
 {
@@ -18,7 +20,16 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	USceneComponent* RootComp;
 
+	UPROPERTY(VisibleAnywhere,Category="Component")
+	UStaticMeshComponent* BulletSM;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UProjectileMovementComponent* ProjectileMovementComp;
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

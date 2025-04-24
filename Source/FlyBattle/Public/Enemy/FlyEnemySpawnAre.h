@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "FlyEnemySpawnAre.generated.h"
 
+class UBoxComponent;
+class AFlyEnemy;
+
 UCLASS()
 class FLYBATTLE_API AFlyEnemySpawnAre : public AActor
 {
@@ -19,6 +22,18 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere,Category="Enemy")
+	TSubclassOf<AFlyEnemy> Enemy;
+
+	UPROPERTY(VisibleAnywhere,Category="Component")
+	UBoxComponent* SpawnArea;
+
+	FTimerHandle TimerHandle_Spawn;
+
+	void SpawnEnemy();
+
+	FVector GetGenerateLocation();
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

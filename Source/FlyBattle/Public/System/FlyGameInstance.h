@@ -7,7 +7,7 @@
 #include "FlyGameInstance.generated.h"
 
 /**
- * 
+ * 处理游戏数据的保存和加载
  */
 UCLASS()
 class FLYBATTLE_API UFlyGameInstance : public UGameInstance

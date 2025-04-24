@@ -18,6 +18,15 @@ void AFlyEnemySpawnAre::BeginPlay()
 	
 }
 
+void AFlyEnemySpawnAre::SpawnEnemy()
+{
+}
+
+FVector AFlyEnemySpawnAre::GetGenerateLocation()
+{
+	return FVector(0, 0, 0);
+}
+
 // Called every frame
 void AFlyEnemySpawnAre::Tick(float DeltaTime)
 {

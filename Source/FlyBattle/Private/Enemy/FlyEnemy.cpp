@@ -2,13 +2,19 @@
 
 
 #include "FlyBattle/Public/Enemy/FlyEnemy.h"
-
+#include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 AFlyEnemy::AFlyEnemy()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComp"));
+	RootComponent = CollisionComp;
+
+	ShipSM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipSM"));
+	ShipSM->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
