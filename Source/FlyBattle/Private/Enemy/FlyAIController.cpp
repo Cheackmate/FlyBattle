@@ -18,17 +18,17 @@ AFlyAIController::AFlyAIController()
 void AFlyAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (BehaviorTree)
-	{
-		RunBehaviorTree(BehaviorTree);
-		GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
-	}
+
 }
 
 void AFlyAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
-
+	if (BehaviorTree)
+	{
+		RunBehaviorTree(BehaviorTree);
+		GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	}
 }
 
 // Called every frame

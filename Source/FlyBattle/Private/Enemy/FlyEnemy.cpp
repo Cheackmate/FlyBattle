@@ -4,6 +4,7 @@
 #include "FlyBattle/Public/Enemy/FlyEnemy.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Enemy/FlyAIController.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -14,6 +15,9 @@ AFlyEnemy::AFlyEnemy()
 
 	ShipSM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipSM"));
 	ShipSM->SetupAttachment(RootComponent);
+
+	AIControllerClass = AFlyAIController::StaticClass();
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 // Called when the game starts or when spawned
@@ -39,5 +43,7 @@ void AFlyEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AFlyEnemy::OnDeath()
 {
 	// 飞机被击中的处理
+	GameState->AddScore(1);
+	Destroy();
 }
 

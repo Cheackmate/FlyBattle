@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FlyCharacter.h"
 #include "GameFramework/Actor.h"
 #include "FlyEnemySpawnAre.generated.h"
 
@@ -33,8 +34,22 @@ protected:
 	void SpawnEnemy();
 
 	FVector GetGenerateLocation();
+
+	// 距离玩家的最小距离
+	float MinimumDistanceToPlayer = 1200.0f;
+
+	UPROPERTY(EditAnywhere,Category="Spawn")
+	int MaxEnemyNum;
+
+	int CurrentEnemyCount;
+
+	float SpawnInterval;
+
+	AFlyCharacter* Player;
 	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void DecreaseEnemyCount();
 };

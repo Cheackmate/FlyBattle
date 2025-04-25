@@ -3,6 +3,7 @@
 
 #include "FlyBattle/Public/FlyBullet.h"
 
+#include "FlyWallBase.h"
 #include "Enemy/FlyEnemy.h"
 #include "Engine/BlockingVolume.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -46,6 +47,9 @@ void AFlyBullet::NotifyActorBeginOverlap(AActor* OtherActor)
 		Destroy();
 	}
 	else if (Cast<ABlockingVolume>(OtherActor)) {
+		Destroy();
+	}else if(Cast<AFlyWallBase>(OtherActor))
+	{
 		Destroy();
 	}
 	
