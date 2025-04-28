@@ -20,5 +20,8 @@ public:
 
 	float Score = 0.0f;
 
+	float PlayerHealth = 5.0f;
+
 	void AddScore(float score);
+
 };

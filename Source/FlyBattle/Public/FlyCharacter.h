@@ -27,9 +27,11 @@ protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
 	
-	UPROPERTY(VisibleAnywhere, Category = "Component")
+	// UPROPERTY(VisibleAnywhere,Category="Component")
+	// USphereComponent* CollisionComp;
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "Component")
 	UStaticMeshComponent* ShipSM;
 
 	UPROPERTY(VisibleAnywhere, Category = "Component")
@@ -60,6 +62,15 @@ protected:
 	USceneComponent* SpawnPoint;
 
 public:
+
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Death")
+	void OnDeath();
+	
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable, Category = "Death")
+	void OnHitResult();
+	
+	// UFUNCTION()
+	// void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	AFlyCharacter();
 	
@@ -100,4 +111,6 @@ protected:
 
 public:
 	AFlyPlayerController* FlyPlayerController = nullptr;
+
+	
 };

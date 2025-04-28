@@ -7,13 +7,12 @@
 #include "EnhancedInputSubsystemInterface.h"
 #include "EnhancedInputSubsystems.h"
 #include "FlyBullet.h"
+#include "FlyPlayerState.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
-#include "Core/BuiltInCameraVariables.h"
-#include "Core/BuiltInCameraVariables.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Sound/SoundCue.h"
 
@@ -28,17 +27,41 @@ void AFlyCharacter::BeginPlay()
 		}
 	}
 	FlyPlayerController = Cast<AFlyPlayerController>(Controller);
-	UE_LOG(LogTemp,Warning,TEXT("Look before"));
+	//UE_LOG(LogTemp,Warning,TEXT("Look before"));
+
+	
 }
+
+// void AFlyCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+// 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+// {
+// 	UE_LOG(LogTemp,Warning,TEXT("OnOverlapBegin Trigger"));
+// 	AFlyPlayerState* PlayerState2 = Cast<AFlyPlayerState>(GetPlayerState());
+// 	// 死亡事件触发
+// 	if (PlayerState2->Health >0)
+// 	{
+// 		PlayerState2->ChangeHealth(-1);
+// 		// TODO 播放一次闪烁材质动画
+// 		OnHitResult();
+// 	}else
+// 	{
+// 		OnDeath();
+// 	}
+// }
 
 AFlyCharacter::AFlyCharacter()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComp"));
+	// CollisionComp->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+	// //CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AFlyCharacter::OnOverlapBegin);
+	// CollisionComp->SetupAttachment(RootComponent);
 	
 	ShipSM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipSM"));
 	ShipSM->SetupAttachment(RootComponent);
-
+	
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
 
@@ -97,7 +120,7 @@ void AFlyCharacter::Tick(float DeltaTime)
 
 void AFlyCharacter::Move(const FInputActionValue& InputActionValue)
 {
-	UE_LOG(LogTemp,Warning,TEXT("Move"));
+	//UE_LOG(LogTemp,Warning,TEXT("Move"));
 	// 获取二维输入向量
 	const FVector2D MoveVector = InputActionValue.Get<FVector2D>();
 
@@ -178,4 +201,6 @@ void AFlyCharacter::Fire()
 			UGameplayStatics::PlaySoundAtLocation(this, ShootCue, GetActorLocation());
 	}
 }
+
+
 

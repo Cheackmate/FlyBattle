@@ -2,3 +2,8 @@
 
 
 #include "FlyPlayerState.h"
+
+void AFlyPlayerState::ChangeHealth(float DeltaHealth)
+{
+	Health = FMath::Clamp(Health + DeltaHealth, 0.0f, MaxHealth);
+}

@@ -7,3 +7,4 @@ void AFlyGameState::AddScore(float score)
 {
 	Score += score;
 }
+

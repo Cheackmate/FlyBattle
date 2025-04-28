@@ -17,8 +17,11 @@ class FLYBATTLE_API AFlyPlayerState : public APlayerState
 public:
 	
 	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = "FlyPlayerState")
-	float Health = 100.0f;
+	float Health = 5.0f;
 
 	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = "FlyPlayerState")
-	float MaxHealth = 100.0f;
+	float MaxHealth = 5.0f;
+
+	UFUNCTION(BlueprintCallable, Category = "FlyPlayerState")
+	void ChangeHealth(float DeltaHealth);
 };
