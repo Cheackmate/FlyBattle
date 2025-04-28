@@ -18,8 +18,8 @@ AFlyBullet::AFlyBullet()
 	RootComponent = RootComp;
 	
 	BulletSM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BulletSM"));
-	
 	BulletSM->SetupAttachment(RootComponent);
+
 
 	ProjectileMovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComp"));
 }
@@ -28,7 +28,7 @@ AFlyBullet::AFlyBullet()
 void AFlyBullet::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	BulletSM->OnComponentBeginOverlap.AddDynamic(this, &AFlyBullet::NotifyActorBeginOverlap);
 }
 
 // Called every frame
@@ -37,21 +37,22 @@ void AFlyBullet::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AFlyBullet::NotifyActorBeginOverlap(AActor* OtherActor)
-{
-	Super::NotifyActorBeginOverlap(OtherActor);
 
+
+void AFlyBullet::NotifyActorBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	
 	AFlyEnemy* Enemy= Cast<AFlyEnemy>(OtherActor);
 	if (Enemy) {
 		Enemy->OnDeath();
-		Destroy();
+		OnBulletDeath(false);
 	}
 	else if (Cast<ABlockingVolume>(OtherActor)) {
-		Destroy();
+		OnBulletDeath(false);
 	}else if(Cast<AFlyWallBase>(OtherActor))
 	{
-		Destroy();
+		OnBulletDeath(true);
 	}
-	
 }
 
