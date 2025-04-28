@@ -40,7 +40,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	USpringArmComponent* SpringArmComp;
 
-	UPROPERTY(EditAnywhere,Category="Fire")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Fire")
 	TSubclassOf<AFlyBullet> Bullet;
 
 	UPROPERTY(EditAnywhere,Category="Move")
