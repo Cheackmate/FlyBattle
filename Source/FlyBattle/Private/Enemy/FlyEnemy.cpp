@@ -44,6 +44,7 @@ void AFlyEnemy::OnDeath()
 {
 	// 飞机被击中的处理
 	GameState->AddScore(1);
+	OnEnemyDiedProcess();
 	Destroy();
 }
 
