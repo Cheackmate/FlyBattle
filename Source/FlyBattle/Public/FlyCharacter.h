@@ -47,10 +47,10 @@ protected:
 	float Speed;
 
 	UPROPERTY(EditAnywhere,Category="Sound")
-	USoundCue* GameOverCue;
+	class USoundCue* GameOverCue;
 	
 	UPROPERTY(EditAnywhere, Category = "Sound")
-	USoundCue* ShootCue;
+	class USoundCue* ShootCue;
 
 	UPROPERTY(VisibleAnywhere,Category="Component")
 	UParticleSystemComponent* ThrusterParticleComp;

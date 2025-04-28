@@ -5,6 +5,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Enemy/FlyEnemy.h"
+#include "Enemy/UAsyncEnemySpawner.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -28,17 +29,24 @@ void AFlyEnemySpawnAre::BeginPlay()
 	Super::BeginPlay();
 	Player=Cast<AFlyCharacter>( UGameplayStatics::GetPlayerPawn(this,0));
 	GetWorldTimerManager().SetTimer(TimerHandle_Spawn,this,&AFlyEnemySpawnAre::SpawnEnemy,SpawnInterval,true,0.0f);
+	EnemySpawner =  NewObject<UUAsyncEnemySpawner>();
+
 
 }
 
 void AFlyEnemySpawnAre::SpawnEnemy()
 {
-	if (Player->GetBDead() == false&&CurrentEnemyCount<MaxEnemyNum)
+	if (Player->GetBDead() == false)
 	{
+		int32 RandomNumber = FMath::RandRange(0, Enemys.Num()-1); 
+		// 生成1 ≤ RandomNumber <3 的整数，即1或2
+		UE_LOG(LogTemp,Warning,TEXT("RandomNumber:%d"),RandomNumber);
+	
 		FActorSpawnParameters SpawnParameters;
-		GetWorld()->SpawnActor<AFlyEnemy>(Enemy, GetGenerateLocation(), FRotator::ZeroRotator, SpawnParameters);
+		GetWorld()->SpawnActor<AFlyEnemy>(Enemys[RandomNumber], GetGenerateLocation(), FRotator::ZeroRotator, SpawnParameters);
 		CurrentEnemyCount++;
 	}
+
 }
 
 FVector AFlyEnemySpawnAre::GetGenerateLocation()

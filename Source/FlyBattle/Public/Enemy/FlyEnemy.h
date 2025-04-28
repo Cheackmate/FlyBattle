@@ -52,5 +52,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OnDeath();
 
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnEnemyDiedProcess();
 };

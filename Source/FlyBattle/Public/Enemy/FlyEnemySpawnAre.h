@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "FlyEnemySpawnAre.generated.h"
 
+class UUAsyncEnemySpawner;
 class UBoxComponent;
 class AFlyEnemy;
 
@@ -24,7 +25,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere,Category="Enemy")
-	TSubclassOf<AFlyEnemy> Enemy;
+	TArray<TSubclassOf<AFlyEnemy>> Enemys;
 
 	UPROPERTY(VisibleAnywhere,Category="Component")
 	UBoxComponent* SpawnArea;
@@ -46,6 +47,8 @@ protected:
 	float SpawnInterval;
 
 	AFlyCharacter* Player;
+
+	UUAsyncEnemySpawner* EnemySpawner;
 	
 public:
 	// Called every frame
